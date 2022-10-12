@@ -42,26 +42,27 @@ class Solution:
 	# @param B : list of strings
 	# @return an integer
 
-	def wordBreak(self, A, B):
+    def wordBreak(self, A, B):
         # add all the dictionary words to a set for faster lookup
-		sample_set = set()
-		for x in B:
-			sample_set.add(x)
+        sample_set = set()
 
-		n = len(A)
+        for x in B:
+            sample_set.add(x)
+
+        n = len(A)
         # initialise the DP that stores whether its possible to segment the input 
         # starting from ith index till end into a space-separated sequence of one or more
         # dictionary words - with False
-		word_break = [False]*(n+1)
+        word_break = [False]*(n+1)
         # initialise the end index + 1 position  as True 
-		word_break[n] = True 
+        word_break[n] = True 
 
-		for i in range(n-1, -1, -1):
-			for j in range(i, n):
+        for i in range(n-1, -1, -1):
+            for j in range(i, n):
                 # check whether the string formed from current till last index is present in the set
                 # and then check the status of word_break starting next index 
-				if A[i:j+1] in sample_set and word_break[j+1]:
-					word_break[i] = True
+                if A[i:j+1] in sample_set and word_break[j+1]:
+                    word_break[i] = True
                     break
                     
-		return 1 if word_break[0] else 0
+        return 1 if word_break[0] else 0
